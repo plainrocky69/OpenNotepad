@@ -8,6 +8,7 @@ public class GUI {
     JScrollPane Scrollpane;
     JMenuBar menuBar;
     JMenu menuFILE, menuEdit, menuFormat, menuColour;
+    JMenuItem iNew, iOpen, iSave, iSaveas, Iexits;
 
     public static void main(String[] args) {
         new GUI();
@@ -17,6 +18,7 @@ public class GUI {
         createWindow();
         createTextArea();
         createMenuBar();
+        createFileMenu();
         window.setVisible(true);
     }
 
@@ -48,5 +50,18 @@ public class GUI {
 
         menuFILE = new JMenu("File");
         menuBar.add(menuFILE);
+    }
+    public void  createFileMenu() {
+
+      iNew = new JMenuItem("New");
+        menuFILE.add(iNew);
+
+        iOpen = new JMenuItem("Open");
+        menuFILE.add(iOpen);
+        iSave = new JMenuItem("Save");
+        menuFILE.add(iSave);
+        iSaveas = new JMenuItem("Save As");
+        menuFILE.add(iSaveas);
+
     }
 }
