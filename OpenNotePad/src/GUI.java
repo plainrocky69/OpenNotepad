@@ -1,14 +1,17 @@
 import javax.swing.*;
-import javax.swing.JTextArea;
 import javax.swing.border.Border;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
-public class GUI {
+public class GUI implements ActionListener {
     JFrame window;
     JTextArea textArea;
     JScrollPane Scrollpane;
     JMenuBar menuBar;
     JMenu menuFILE, menuEdit, menuFormat, menuColour;
-    JMenuItem iNew, iOpen, iSave, iSaveas, Iexits;
+    JMenuItem iNew, iOpen, iSave, iSaveas, iexit;
+    Function_File file = new Function_File(this);
 
     public static void main(String[] args) {
         new GUI();
@@ -20,6 +23,7 @@ public class GUI {
         createMenuBar();
         createFileMenu();
         window.setVisible(true);
+        file = new Function_File(this);  // Instantiate Function_File properly
     }
 
     public void createWindow() {
@@ -51,17 +55,42 @@ public class GUI {
         menuFILE = new JMenu("File");
         menuBar.add(menuFILE);
     }
-    public void  createFileMenu() {
 
-      iNew = new JMenuItem("New");
+    public void createFileMenu() {
+        iNew = new JMenuItem("New");
+        iNew.addActionListener(this);
+        iNew.setActionCommand("New");
         menuFILE.add(iNew);
 
         iOpen = new JMenuItem("Open");
+        iOpen.addActionListener(this);
+        iOpen.setActionCommand("Open");
         menuFILE.add(iOpen);
+
         iSave = new JMenuItem("Save");
         menuFILE.add(iSave);
+
         iSaveas = new JMenuItem("Save As");
         menuFILE.add(iSaveas);
 
+        iexit = new JMenuItem("Exit");
+        menuFILE.add(iexit);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+
+        switch (command) {
+            case "New":
+                file.newFile();
+                break;
+
+
+            case "Open":
+                file.open();
+                break;
+
+        }
     }
 }
